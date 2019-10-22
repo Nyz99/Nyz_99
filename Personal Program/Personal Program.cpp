@@ -11,7 +11,7 @@
 
 using namespace std;
 int begFlag = 1;
-int N=10;
+int N,M;
 typedef struct {
 	unsigned int charNum;
 	unsigned int lineNum;
@@ -268,7 +268,7 @@ void getResult(const char* resfile, amount &result, vector<word> &wvec, vector<p
 	ofstream output(resfile);
 	vector<word>::iterator wbeg = wvec.begin(), wend = wvec.end(), witr;
 	sort(wbeg, wend, wordCompare);
-	cout << "请输入N"<<endl;
+	cout << "请输入N---->查看的单词数"<<endl;
 	cin >> N;
 	output << "文件中出现次数最多的"<<N<<"个单词：" << endl;
 	if (wvecSize) {
@@ -282,6 +282,26 @@ void getResult(const char* resfile, amount &result, vector<word> &wvec, vector<p
 			vector<word>::iterator wlast = wbeg + N;
 			for (witr = wbeg; witr != wlast; witr++) {
 				witr->printWord(output);
+			}
+		}
+
+	}
+	vector<phrase>::iterator pbeg = pvec.begin(), pend = pvec.end(), pitr;
+	sort(pbeg, pend, phraseCompare);
+	cout << "请输入M---->查看的短语数" << endl;
+	cin >> M;
+	output << "文件中出现次数最多的" << M << "个短语：" << endl;
+	if (pvecSize) {
+
+		if (pvecSize < M) {
+			for (pitr = pbeg; pitr != pend; pitr++) {
+				pitr->printPhrase(output);
+			}
+		}
+		else {
+			vector<phrase>::iterator plast = pbeg + M;
+			for (pitr = pbeg; pitr != plast; pitr++) {
+				pitr->printPhrase(output);
 			}
 		}
 	}
