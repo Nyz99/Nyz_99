@@ -11,7 +11,7 @@
 
 using namespace std;
 int begFlag = 1;
-
+int N=10;
 typedef struct {
 	unsigned int charNum;
 	unsigned int lineNum;
@@ -268,21 +268,24 @@ void getResult(const char* resfile, amount &result, vector<word> &wvec, vector<p
 	ofstream output(resfile);
 	vector<word>::iterator wbeg = wvec.begin(), wend = wvec.end(), witr;
 	sort(wbeg, wend, wordCompare);
-	output << "文件中出现的单词：" << endl;
+	cout << "请输入N"<<endl;
+	cin >> N;
+	output << "文件中出现次数最多的"<<N<<"个单词：" << endl;
 	if (wvecSize) {
 
-		if (wvecSize < result.wordNum) {
+		if (wvecSize < N) {
 			for (witr = wbeg; witr != wend; witr++) {
 				witr->printWord(output);
 			}
 		}
 		else {
-			vector<word>::iterator wlast = wbeg + 10;
+			vector<word>::iterator wlast = wbeg + N;
 			for (witr = wbeg; witr != wlast; witr++) {
 				witr->printWord(output);
 			}
 		}
 	}
+	cout << "请在Result.txt中查看结果" << endl;
 }
 int getAllFiles(string path, vector<string> &files)
 {
